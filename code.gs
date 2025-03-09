@@ -1,8 +1,9 @@
 /*********************** CONFIGURATION ***********************/
 var eventName = "Gitflow 2.0";
+var SocietyName = "ISTE SC GECBH";
+
 var slideTemplateUrl = "https://docs.google.com/presentation/d/1HqRF0cAo_1PmYszSqQZjmYkA1Z2C_RTO3aNlNXNaCC0/edit";
 var tempFolderUrl = "https://drive.google.com/drive/folders/1cYzG-Hj_jG2uFoyffn47yeHcfzubbzwP";
-var SocietyName = "ISTE SC GECBH";
 var sheetUrl = "https://docs.google.com/spreadsheets/d/1MvTSRpp0yfpeYfmajukfsjelLEct1G0F_-2Po5ebIs0/edit";
 
 /*********************** HELPER FUNCTIONS ***********************/
