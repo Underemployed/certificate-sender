@@ -1,12 +1,29 @@
 var eventName = "Gitflow 2.0";
-var slideTemplateId = "YOUR_SLIDE_TEMPLATE_ID";
-var sheetId = "YOUR_SPREADSHEET_ID";
-var tempFolderId = "YOUR_TEMP_FOLDER_ID";
+var slideTemplateId = "1HqRF0cAo_1PmYszSqQZjmYkA1Z2C_RTO3aNlNXNaCC0";
+var tempFolderId = "1cYzG-Hj_jG2uFoyffn47yeHcfzubbzwP";
 var SocietyName = "ISTE SC GECBH";
+var sheetId = "1MvTSRpp0yfpeYfmajukfsjelLEct1G0F_-2Po5ebIs0";
+var sheet_url = "https://docs.google.com/spreadsheets/d/1MvTSRpp0yfpeYfmajukfsjelLEct1G0F_-2Po5ebIs0/edit?usp=sharing";
 
-// Helper function to find column index case-insensitively
-function getColumnIndex(headers, columnName) {
-    return headers.findIndex(header => header.toLowerCase().trim() === columnName.toLowerCase().trim());
+function selectOrCreateSheet(sheetName, url = null) {
+    let app;
+    if (url) {
+        app = SpreadsheetApp.openByUrl(url);
+    } else {
+        app = SpreadsheetApp.getActiveSpreadsheet();
+    }
+    let sheet = app.getSheetByName(sheetName);
+    return sheet ? sheet : app.insertSheet(sheetName);
+}
+
+function getColumnIndex(column) {
+    const sheet = selectOrCreateSheet("Sheet1", sheet_url);
+    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    const lowerHeaders = headers.map(header => header.toString().toLowerCase());
+    console.log(column)
+    const lowerColumn = column.toString().toLowerCase();
+    const columnIndex = lowerHeaders.indexOf(lowerColumn);
+    return columnIndex;
 }
 
 // Create required columns if missing
@@ -26,12 +43,11 @@ function setupSheet() {
     return {
         sheet: sheet,
         headers: headers,
-        nameIndex: getColumnIndex(headers, 'Name'),
-        emailIndex: getColumnIndex(headers, 'Email'),
-        institutionIndex: getColumnIndex(headers, 'College'), // Handles 'college' or 'College'
-        dateIndex: getColumnIndex(headers, 'Date'),
-        slideIndex: getColumnIndex(headers, 'Slide ID'),
-        statusIndex: getColumnIndex(headers, 'Status')
+        nameIndex: getColumnIndex("Name"),
+        emailIndex: getColumnIndex("Email"),
+        institutionIndex: getColumnIndex("College"), // Handles "college" or "College"
+        slideIndex: getColumnIndex("Slide ID"),
+        statusIndex: getColumnIndex("Status")
     };
 }
 
@@ -69,9 +85,10 @@ function createCertificates() {
             // Update template text
             var presentation = SlidesApp.openById(slideId);
             presentation.getSlides().forEach(slide => {
-                slide.replaceAllText("<Name>", name);
-                slide.replaceAllText("<Institution>", institution);
+                slide.replaceAllText("<NAME>", name);
+                slide.replaceAllText("<INSTITUTION>", institution);
             });
+            console.log(name, institution)
 
             // Update spreadsheet
             sheet.getRange(row, setup.slideIndex + 1).setValue(slideId);
