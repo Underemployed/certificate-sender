@@ -1,3 +1,9 @@
+
+
+
+/************************    TEMPLATE  FOLDER  ***********************/
+// CLONE THIS FOLDER
+// https://drive.google.com/drive/folders/1VXmOnYeCrbmjNWG8g1RNoNK9diYslLCJ?usp=sharing
 /*********************** CONFIGURATION ***********************/
 var eventName = "Master the Basics of Flutter";
 var SocietyName = "ISTE SC GECBH";

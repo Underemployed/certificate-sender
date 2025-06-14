@@ -1,21 +1,44 @@
-# Certificate Automation Script
+# Certificate Sharing Tool
 
-This Google Apps Script automates the creation and distribution of certificates using Google Slides, Sheets, and Gmail. Designed for event organizers to efficiently manage certificate generation and email delivery.
+An automated tool for generating and sharing certificates using Google Apps Script and Google Sheets.
 
-## Features
-- 📄 **Auto-generate certificates** from a Google Slides template
-- 📧 **Send certificates via email** as PDF attachments
-- ✅ **Status tracking** in Google Sheets
-- 🔄 **Placeholder replacement** for participant details
-- 🛠️ **Automatic sheet configuration**
+## Overview
+
+This tool automates the process of creating personalized certificates and sharing them via email. It uses Google Sheets to manage recipient data and Google Apps Script to generate certificates from a template and send them automatically.
+
+## How It Works
+
+The system consists of:
+- **Google Sheet**: Contains recipient information and tracks certificate status
+- **Google Apps Script**: Handles certificate generation and email distribution
+- **Certificate Template**: Base template for generating personalized certificates
 
 ## Setup Instructions
 
-### 1. Use Template
-1. Access the template: [Drive Template](https://drive.google.com/drive/folders/1VXmOnYeCrbmjNWG8g1RNoNK9diYslLCJ?usp=sharing)
-2. Make copies of all required files
+### 1. Folder Structure
+Your Google Drive should be organized as shown below:
 
-### 2. Configuration
+![Folder Structure](img/folder%20structure.jpeg)
+
+### 2. Google Sheet Setup
+Create a Google Sheet with recipient information:
+
+![Sheet Example](img/sheet_example.jpeg)
+
+Required columns (case insensiteve):
+- Recipents college   -> college
+- Recipient names  -> name
+- Email addresses  -> email
+- Any other personalization data needed for certificates
+
+### 3. Certificate Template
+Prepare your certificate template in Google Slides or Docs:
+
+![Certificate Template](img/certicate_template.jpeg)
+
+### 4. Apps Script Configuration
+Configure the Apps Script with your specific variables:
+
 Update these variables in the script:
 ```javascript
 var eventName = "Master the Basics of Flutter";
@@ -25,40 +48,69 @@ var tempFolderUrl = "YOUR_TEMP_FOLDER_URL";
 var sheetUrl = "YOUR_SHEET_URL";
 ```
 
-### 3. Google Sheet Preparation
-Create a Google Sheet with these columns (order doesn't matter):
-- **Name** - Full name of the participant 
-- **Email** - Email address of the participant
-- **College** - Institution name of the participant
-- **Slide ID** (auto-populated)
-- **Status** (auto-populated)
+![Apps Script Config](img/appscript%20config%20var%20example.jpeg)
 
-### 4. Template Presentation Setup
-
-Ensure the template has these placeholders:
-- `<NAME>` for participant names
-- `<COLLEGE>` for institution names
+Key configuration variables:
+- Sheet ID
+- Template document ID
+- Folder IDs for storing generated certificates
+- Email settings
 
 ## Usage
 
-### 1. Create Certificates
-1. Populate participant data in the appscript
-2. Run `createCertificates()` from the script editor. You can see live changes in the sheet.
-3. Monitor status column for progress
+1. **Prepare your data**: Fill the Google Sheet with recipient information
+2. **Configure the script**: Update the configuration variables in Apps Script
+3. **Run the script**: Execute the certificate generation and sharing process
+4. **Monitor progress**: Check the status sheet for completion and any errors
 
-### 2. Send Certificates
-1. Verify certificates marked as "CREATED" in sheet.
-2. Run `sendCertificates()` from the script editor
-3. Check status for "SENT" confirmation.
+## Limitations & Important Notes
 
-## Error Handling
-Monitor "Status" column for:
-- `Missing data` - Incomplete information
-- `Missing email/slide` - Missing required fields
-- `ERROR: [message]` - Specific error details. Usually timeout just rerun.
+### Google Workspace Limits
+- **Email limit**: 100 emails per day for standard Gmail accounts
+- **Script timeout**: Apps Script has execution time limits that may cause timeouts for large batches
+- **API quotas**: Various Google API limits may apply
 
-## Important Notes
-1. Template must contain `<NAME>` and `<COLLEGE>` placeholders
-2. Certificates are stored in specified temp folder
-3. Runs in batches of 40 to avoid timeout issues
+### Common Issues & Troubleshooting
 
+Most errors will be visible in:
+- Excel status sheet
+- Apps Script execution logs
+
+**Common solutions**:
+- **Re-run with different account**: Sometimes using a different Google account with proper access permissions resolves issues
+- **Retry with same account**: Simple retry often works for temporary timeouts
+- **Check permissions**: Ensure the script has access to all required Google Drive folders and sheets
+
+**Typical causes of issues**:
+- Email daily limit reached (100 emails)
+- Script execution timeout due to large batch size
+- Permission/access issues with Google Drive folders
+- Unaccounted edge cases in recipient data
+
+## Disclaimer
+
+This tool was only written for the purpose of solving my own personal requirements.
+
+I decided to make this public on GitHub because:
+- It was useful for me, so maybe it'll be useful for others in the future.
+- Future me might be thankful if I ever need to do this again.
+- This README was generated with AI assistance. If you encounter any issues, please submit them as issue.
+
+
+With that said, please bear in mind that this tool won't be actively maintained and your mileage may vary. I'm sure it's far from perfect so if you choose to use it please proceed with caution and be careful to verify the results! I hope it's helpful.
+
+
+
+
+## Disclaimer
+
+This tool was only written for the purpose of solving my own personal requirements.
+
+I decided to make this public on GitHub because:
+
+- It was useful for me, so maybe it'll be useful for others in the future.
+- Future me might be thankful if I ever need to do this again.
+
+With that said, please bear in mind that this tool won't be actively maintained and your mileage may vary. I'm sure it's far from perfect so if you choose to use it please proceed with caution and be careful to verify the results! I hope it's helpful.
+
+Good luck with your certificate generation.

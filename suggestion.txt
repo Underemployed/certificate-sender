@@ -1,0 +1,3 @@
+autogenerate and get urls of folder and sheet
+requires testing
+integration with gemini for testing correction of college.(good prompting req)
