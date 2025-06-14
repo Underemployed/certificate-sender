@@ -54,14 +54,18 @@ var sheetUrl = "YOUR_SHEET_URL";
 ```
 
 ![Apps Script Config](img/appscript%20config%20var%20example.jpeg)
+
 - Email acesss and sharing settings must be checked
 
 ## Usage
 
 1. **Prepare your data**: Fill the Google Sheet with recipient information (Name, College, Email)
 2. **Configure the script**: Update the configuration variables in Apps Script
-3. **Run the script**: Execute the certificate generation and sharing process
-4. **Monitor progress**: Check the status sheet for completion and any errors
+3. **Run the script**: Select function and execute. 
+![alt text](img/how%20to%20run.jpeg)
+4. **Monitor progress**: Check the data sheet for completion and any errors
+
+
 
 ## Limitations & Important Notes
 

@@ -1,9 +1,9 @@
-
-
-
+// Made by UNDEREMPLOYED 14-06-2025
+// Making life easier
 /************************    TEMPLATE  FOLDER  ***********************/
 // CLONE THIS FOLDER
 // https://drive.google.com/drive/folders/1VXmOnYeCrbmjNWG8g1RNoNK9diYslLCJ?usp=sharing
+
 /*********************** CONFIGURATION ***********************/
 var eventName = "Master the Basics of Flutter";
 var SocietyName = "ISTE SC GECBH";
@@ -13,7 +13,6 @@ var slideTemplateUrl = "https://docs.google.com/presentation/d/1ORJK9ApNz-ChPRzh
 var tempFolderUrl = "https://drive.google.com/drive/folders/1hODF7fEX4J8vW0UOpQoFU2KYsUqY-Nuj?usp=drive_link";
 // contains name and college  and email of participants  order doesnt matter
 var sheetUrl = "https://docs.google.com/spreadsheets/d/1L6gjkWJbD_ZKozEXLSkOkMUMnyFBlAO155ydjqRzO8s/edit?gid=0#gid=0";
-
 
 /*********************** HELPER FUNCTIONS ***********************/
 function getIdFromUrl(url) {
@@ -94,6 +93,7 @@ function createCertificates() {
         const template = DriveApp.getFileById(getIdFromUrl(slideTemplateUrl));
         const folder = DriveApp.getFolderById(getIdFromUrl(tempFolderUrl));
         const data = sheet.getDataRange().getValues();
+        const trashSheet = selectOrCreateSheet("trash");
 
         Logger.log(`Processing ${data.length - 1} participants`);
 
@@ -128,6 +128,8 @@ function createCertificates() {
 
                 sheet.getRange(rowNumber, setup.slideIndex + 1).setValue(slideCopy.getId());
                 sheet.getRange(rowNumber, setup.statusIndex + 1).setValue("CREATED");
+                trashSheet.appendRow([slideCopy.getId()]);
+
                 Logger.log(`created certificate ${name}=> ${capitalizeName(name)} - ${slideCopy.getUrl()}`);
                 SpreadsheetApp.flush();
                 abc++;
@@ -210,6 +212,8 @@ function sendCertificates() {
     }
 }
 
+
+
 /*********************** MAIN FUNCTION ***********************/
 function createEverything() {
     try {
@@ -237,9 +241,50 @@ function sendEverything() {
         sendCertificates();
 
 
+
+
     } catch (error) {
         Logger.log(`Process failed: ${error.message}`);
 
         throw error;
     }
+}
+
+
+
+// puts all generated ppt in trash run this when u need to clean stuff
+// and empty trashbin
+function deletePPTs() {
+    const trashSheet = selectOrCreateSheet("trash");
+    const sheet = selectOrCreateSheet("Sheet1");
+
+    const colNamesToClear = ["Status", "Slide ID"];
+    const numRows = sheet.getLastRow();
+
+    for (const name of colNamesToClear) {
+        try {
+            const colIndex = getColumnIndex(sheet, name) + 1; // Convert to 1-based
+            sheet.getRange(2, colIndex, numRows - 1).clearContent(); // Clear below header
+        } catch (e) {
+            Logger.log(`Column '${name}' not found. Skipping.`);
+        }
+    }
+    console.log("Cleared sheet1 deleting ppts");
+
+    const data = trashSheet.getDataRange().getValues();
+    for (let i = 0; i < data.length; i++) {
+        const fileId = data[i][0];
+        if (!fileId) continue;
+
+        try {
+            DriveApp.getFileById(fileId).setTrashed(true);
+        } catch (e) {
+            // silently skip if invalid or already gone
+            cosnole.log(e);
+        }
+    }
+
+    // Wipe the entire trash sheet (all rows, all columns)
+    trashSheet.clear();
+    Logger.log("Done: files trashed, sheet cleared.");
 }
