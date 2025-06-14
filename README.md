@@ -11,65 +11,54 @@ This Google Apps Script automates the creation and distribution of certificates 
 
 ## Setup Instructions
 
-### 1. Configuration
+### 1. Use Template
+1. Access the template: [Drive Template](https://drive.google.com/drive/folders/1VXmOnYeCrbmjNWG8g1RNoNK9diYslLCJ?usp=sharing)
+2. Make copies of all required files
+
+### 2. Configuration
 Update these variables in the script:
 ```javascript
-var eventName = "Gitflow 2.0"; // Your event name
-var SocietyName = "ISTE SC GECBH"; // Your organization name
-var slideTemplateUrl = "YOUR_SLIDE_TEMPLATE_URL"; // Google Slides URL
-var tempFolderUrl = "YOUR_TEMP_FOLDER_URL"; // Google Drive folder URL
-var sheetUrl = "YOUR_SHEET_URL"; // Google Sheets URL
+var eventName = "Master the Basics of Flutter";
+var SocietyName = "ISTE SC GECBH";
+var slideTemplateUrl = "YOUR_SLIDE_TEMPLATE_URL";
+var tempFolderUrl = "YOUR_TEMP_FOLDER_URL";
+var sheetUrl = "YOUR_SHEET_URL";
 ```
 
-### 2. Google Sheet Preparation
+### 3. Google Sheet Preparation
 Create a Google Sheet with these columns (order doesn't matter):
-- **Name** - Participant's full name
-- **Email** - Participant's email address
-- **College** - Participant's institution
+- **Name** - Full name of the participant 
+- **Email** - Email address of the participant
+- **College** - Institution name of the participant
 - **Slide ID** (auto-populated)
 - **Status** (auto-populated)
 
+### 4. Template Presentation Setup
 
-### 3. Template Setup
-Create a Google Slides template with these placeholders:
+Ensure the template has these placeholders:
 - `<NAME>` for participant names
 - `<COLLEGE>` for institution names
 
 ## Usage
 
 ### 1. Create Certificates
-1. Populate participant data in the sheet
-2. Run `createCertificates()` from the script editor
-3. Certificates will be:
-   - Generated in your temp folder
-   - Linked in the "Slide ID" column
-   - Marked as "CREATED" when successful
+1. Populate participant data in the appscript
+2. Run `createCertificates()` from the script editor. You can see live changes in the sheet.
+3. Monitor status column for progress
 
 ### 2. Send Certificates
-1. Ensure all certificates are marked "CREATED"
+1. Verify certificates marked as "CREATED" in sheet.
 2. Run `sendCertificates()` from the script editor
-3. Emails will be:
-   - Sent with PDF attachments
-   - Marked as "SENT" when successful
-
+3. Check status for "SENT" confirmation.
 
 ## Error Handling
-Check the "Status" column for:
-- `Missing data` - Incomplete participant information
-- `Missing email/slide` - Required fields for emailing
-- `ERROR: [message]` - Specific error details
+Monitor "Status" column for:
+- `Missing data` - Incomplete information
+- `Missing email/slide` - Missing required fields
+- `ERROR: [message]` - Specific error details. Usually timeout just rerun.
 
 ## Important Notes
-1. Template Requirements:
-   - Must contain `<NAME>` and `<COLLEGE>` placeholders
-   - All slides will be processed for text replacement
-   
-2. Folder Structure:
-   ```plaintext
-   📁 Your Temp Folder
-   └── 📄 [Participant Name] - Certificate (Google Slide)
-   ```
-
-
-
+1. Template must contain `<NAME>` and `<COLLEGE>` placeholders
+2. Certificates are stored in specified temp folder
+3. Runs in batches of 40 to avoid timeout issues
 

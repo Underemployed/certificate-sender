@@ -1,9 +1,13 @@
 /*********************** CONFIGURATION ***********************/
 var eventName = "Master the Basics of Flutter";
 var SocietyName = "ISTE SC GECBH";
-var slideTemplateUrl = "presentation_url"; // <COLLEGE>  <NAME> in template for replacement
-var tempFolderUrl = "folder_url"; // where certificates are stored
-var sheetUrl = "google_sheet_url";  // contains name and college of participants 
+// <COLLEGE>  <NAME> in template ppt for replacement
+var slideTemplateUrl = "https://docs.google.com/presentation/d/1ORJK9ApNz-ChPRzhTCvueeOgpYZ_eIUbL9zOPN6I2eY/edit";
+// where certificates are stored
+var tempFolderUrl = "https://drive.google.com/drive/folders/1hODF7fEX4J8vW0UOpQoFU2KYsUqY-Nuj?usp=drive_link";
+// contains name and college  and email of participants  order doesnt matter
+var sheetUrl = "https://docs.google.com/spreadsheets/d/1L6gjkWJbD_ZKozEXLSkOkMUMnyFBlAO155ydjqRzO8s/edit?gid=0#gid=0";
+
 
 /*********************** HELPER FUNCTIONS ***********************/
 function getIdFromUrl(url) {
@@ -11,6 +15,7 @@ function getIdFromUrl(url) {
     const match = url.match(pattern);
     return match ? match[0] : null;
 }
+//  ultimate name formating function
 function capitalizeName(name) {
     let formatted = name.replace(/\./g, ' ');
     formatted = formatted.replace(/\s+/g, ' ').trim();
@@ -34,10 +39,11 @@ function selectOrCreateSheet(sheetName) {
 
 function getColumnIndex(sheet, column) {
     const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-    const index = headers.findIndex(h => h.toLowerCase() === column.toLowerCase());
+    const index = headers.findIndex(h => h.trim().toLowerCase() === column.trim().toLowerCase());
     if (index === -1) throw new Error(`Column '${column}' not found`);
     return index;
 }
+
 
 /*********************** CORE FUNCTIONS ***********************/
 function setupSheet() {
