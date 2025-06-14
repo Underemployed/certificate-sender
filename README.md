@@ -18,6 +18,11 @@ The system consists of:
 ### 1. Folder Structure
 Your Google Drive should be organized as shown below:
 
+
+[Clone this Drive folder to your Google Drive](https://drive.google.com/drive/folders/1VXmOnYeCrbmjNWG8g1RNoNK9diYslLCJ?usp=sharing)
+
+- Manage access to the folder with other required folders.
+
 ![Folder Structure](img/folder%20structure.jpeg)
 
 ### 2. Google Sheet Setup
