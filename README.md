@@ -49,16 +49,11 @@ var sheetUrl = "YOUR_SHEET_URL";
 ```
 
 ![Apps Script Config](img/appscript%20config%20var%20example.jpeg)
-
-Key configuration variables:
-- Sheet ID
-- Template document ID
-- Folder IDs for storing generated certificates
-- Email settings
+- Email acesss and sharing settings must be checked
 
 ## Usage
 
-1. **Prepare your data**: Fill the Google Sheet with recipient information
+1. **Prepare your data**: Fill the Google Sheet with recipient information (Name, College, Email)
 2. **Configure the script**: Update the configuration variables in Apps Script
 3. **Run the script**: Execute the certificate generation and sharing process
 4. **Monitor progress**: Check the status sheet for completion and any errors
@@ -66,9 +61,9 @@ Key configuration variables:
 ## Limitations & Important Notes
 
 ### Google Workspace Limits
-- **Email limit**: 100 emails per day for standard Gmail accounts
-- **Script timeout**: Apps Script has execution time limits that may cause timeouts for large batches
-- **API quotas**: Various Google API limits may apply
+- **Email limit**: 100 emails per day for standard Gmail accounts. Use different email with access
+- **Script timeout**: Apps Script has execution time limits that may cause timeouts for large batches. *Just rerun*
+- **API quotas**: Various Google API limits may apply. 
 
 ### Common Issues & Troubleshooting
 
