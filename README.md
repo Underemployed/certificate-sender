@@ -26,15 +26,16 @@ Your Google Drive should be organized as shown below:
 ![Folder Structure](img/folder%20structure.jpeg)
 
 ### 2. Google Sheet Setup
-Create a Google Sheet with recipient information:
-
-![Sheet Example](img/sheet_example.jpeg)
+Create a Google Sheet with recipient information(can be in any order): 
 
 Required columns (case insensiteve):
 - Recipents college   -> college
 - Recipient names  -> name
 - Email addresses  -> email
 - Any other personalization data needed for certificates
+- Example image 
+![Sheet Example](img/sheet_example.jpeg)
+
 
 ### 3. Certificate Template
 Prepare your certificate template in Google Slides or Docs:
