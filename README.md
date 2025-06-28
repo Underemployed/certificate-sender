@@ -33,7 +33,8 @@ Required columns (case insensiteve):
 - Recipient names  -> name
 - Email addresses  -> email
 - Any other personalization data needed for certificates
-- Example image 
+- Example image
+
 ![Sheet Example](img/sheet_example.jpeg)
 
 
